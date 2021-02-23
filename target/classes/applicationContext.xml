@@ -10,5 +10,9 @@
     <bean id="musicBean"
           class="org.spring.learn.ChristianMusic">
     </bean>
+    <bean id="musicPlayer"
+          class="org.spring.learn.MusicPlayer">
+        <constructor-arg ref="musicBean"/>
+    </bean>
 
 </beans>
