@@ -7,12 +7,24 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="musicBean"
-          class="org.spring.learn.ChristianMusic">
-    </bean>
-    <bean id="musicPlayer"
-          class="org.spring.learn.MusicPlayer">
-        <constructor-arg ref="musicBean"/>
+    <context:property-placeholder location="classpath:musicPlayer.properties"/>
+
+    <bean id="christianMusicBean" class="org.spring.learn.ChristianMusic" />
+    <bean id="classicalMusicBean" class="org.spring.learn.ClassicalMusic" />
+    <bean id="rockMusicBean" class="org.spring.learn.RockMusic" />
+
+
+    <bean id="musicPlayer" class="org.spring.learn.MusicPlayer">
+        <property name="musicList">
+            <list>
+                <ref bean="christianMusicBean"/>
+                <ref bean="classicalMusicBean"/>
+                <ref bean="rockMusicBean"/>
+            </list>
+        </property>
+
+        <property name="name" value="${musicPlayer.name}"/>
+        <property name="volume" value="${musicPlayer.volume}"/>
     </bean>
 
 </beans>
