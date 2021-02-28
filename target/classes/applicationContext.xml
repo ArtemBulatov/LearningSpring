@@ -9,9 +9,16 @@
 
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
 
-    <bean id="christianMusicBean" class="org.spring.learn.ChristianMusic" />
-    <bean id="classicalMusicBean" class="org.spring.learn.ClassicalMusic" />
-    <bean id="rockMusicBean" class="org.spring.learn.RockMusic" />
+    <bean id="christianMusicBean" class="org.spring.learn.ChristianMusic"
+          init-method="initMusic"
+          destroy-method="destroyMusic"
+          factory-method="getChristianMusic"/>
+    <bean id="classicalMusicBean" class="org.spring.learn.ClassicalMusic"
+          init-method="initMusic"
+          destroy-method="destroyMusic"/>
+    <bean id="rockMusicBean" class="org.spring.learn.RockMusic"
+          init-method="initMusic"
+          destroy-method="destroyMusic"/>
 
 
     <bean id="musicPlayer" class="org.spring.learn.MusicPlayer">
