@@ -1,14 +1,23 @@
 package org.spring.learn;
 
-public class MusicPlayer {
-    private Music music;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-    // Inversion of Control
-    public MusicPlayer(Music music) {
-        this.music = music;
+@Component
+public class MusicPlayer {
+
+    private ClassicalMusic classicalMusic;
+    private ChristianMusic christianMusic;
+    private RockMusic rockMusic;
+
+    @Autowired
+    public MusicPlayer(ClassicalMusic classicalMusic, ChristianMusic christianMusic, RockMusic rockMusic) {
+        this.classicalMusic = classicalMusic;
+        this.christianMusic = christianMusic;
+        this.rockMusic = rockMusic;
     }
 
-    public void playMusic(){
-        System.out.println("Playing: " + music.getSong());
+    public String playMusic(){
+        return "\n" + "Playing: " + classicalMusic.getSong() + "\n" + "Playing: " + christianMusic.getSong() + "\n" + "Playing: " + rockMusic.getSong();
     }
 }
