@@ -1,7 +1,10 @@
 package org.spring.learn;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Scope("singleton")
 public class RockMusic implements Music {
     private final List<String> rockMusicList = new ArrayList<>();
 
@@ -29,4 +33,15 @@ public class RockMusic implements Music {
     public List<String> getSongs() {
         return rockMusicList;
     }
+
+    @PostConstruct
+    private void doMyInit() {
+        System.out.println("Doing my initialization");
+    }
+
+    @PreDestroy
+    private void doMyDestroy() {
+        System.out.println("Doing my destruction");
+    }
+
 }

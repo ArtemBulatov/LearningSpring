@@ -1,12 +1,27 @@
 package org.spring.learn;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public class MusicPlayer {
+    @Value("${musicPlayer.name}")
+    private String name;
+
+    @Value("${musicPlayer.volume}")
+    private int volume;
+
+    public String getName() {
+        return name;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
     private Music classicalMusic;
     private Music christianMusic;
     private Music rockMusic;
@@ -22,13 +37,13 @@ public class MusicPlayer {
         String resultMusic = "Music is not found. Try again.";
 
         switch (genre) {
-            case ROCK_MUSIC:
+            case CLASSICAL_MUSIC:
                 resultMusic = randomMusic(classicalMusic.getSongs());
                 break;
             case CHRISTIAN_MUSIC:
                 resultMusic = randomMusic(christianMusic.getSongs());
                 break;
-            case CLASSICAL_MUSIC:
+            case ROCK_MUSIC:
                 resultMusic = randomMusic(rockMusic.getSongs());
                 break;
         }
