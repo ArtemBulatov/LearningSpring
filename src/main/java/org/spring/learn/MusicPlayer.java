@@ -3,12 +3,13 @@ package org.spring.learn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class MusicPlayer {
-
-    private ClassicalMusic classicalMusic;
-    private ChristianMusic christianMusic;
-    private RockMusic rockMusic;
+    private Music classicalMusic;
+    private Music christianMusic;
+    private Music rockMusic;
 
     @Autowired
     public MusicPlayer(ClassicalMusic classicalMusic, ChristianMusic christianMusic, RockMusic rockMusic) {
@@ -17,7 +18,26 @@ public class MusicPlayer {
         this.rockMusic = rockMusic;
     }
 
-    public String playMusic(){
-        return "\n" + "Playing: " + classicalMusic.getSong() + "\n" + "Playing: " + christianMusic.getSong() + "\n" + "Playing: " + rockMusic.getSong();
+    public String playMusic(MusicGenre genre){
+        String resultMusic = "Music is not found. Try again.";
+
+        switch (genre) {
+            case ROCK_MUSIC:
+                resultMusic = randomMusic(classicalMusic.getSongs());
+                break;
+            case CHRISTIAN_MUSIC:
+                resultMusic = randomMusic(christianMusic.getSongs());
+                break;
+            case CLASSICAL_MUSIC:
+                resultMusic = randomMusic(rockMusic.getSongs());
+                break;
+        }
+
+        return "\nPlaying: " + resultMusic;
+    }
+
+    public static String randomMusic(List<String> musicList) {
+        int indexOfMusic = (int) (Math.random() * musicList.size());
+        return musicList.get(indexOfMusic);
     }
 }
