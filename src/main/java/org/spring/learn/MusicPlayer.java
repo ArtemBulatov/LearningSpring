@@ -1,12 +1,14 @@
 package org.spring.learn;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.spring.learn.genres.ChristianMusic;
+import org.spring.learn.genres.ClassicalMusic;
+import org.spring.learn.genres.MusicGenre;
+import org.spring.learn.genres.RockMusic;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
+
 public class MusicPlayer {
     @Value("${musicPlayer.name}")
     private String name;
@@ -22,11 +24,10 @@ public class MusicPlayer {
         return volume;
     }
 
-    private Music classicalMusic;
-    private Music christianMusic;
-    private Music rockMusic;
+    private final Music classicalMusic;
+    private final Music christianMusic;
+    private final Music rockMusic;
 
-    @Autowired
     public MusicPlayer(ClassicalMusic classicalMusic, ChristianMusic christianMusic, RockMusic rockMusic) {
         this.classicalMusic = classicalMusic;
         this.christianMusic = christianMusic;
@@ -48,7 +49,7 @@ public class MusicPlayer {
                 break;
         }
 
-        return "\nPlaying: " + resultMusic;
+        return this.name + "\nPlaying: " + resultMusic + " with volume " + this.volume;
     }
 
     public static String randomMusic(List<String> musicList) {

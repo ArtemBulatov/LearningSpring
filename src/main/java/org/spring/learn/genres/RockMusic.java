@@ -1,5 +1,6 @@
-package org.spring.learn;
+package org.spring.learn.genres;
 
+import org.spring.learn.Music;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -11,14 +12,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-@Scope("singleton")
+
 public class RockMusic implements Music {
     private final List<String> rockMusicList = new ArrayList<>();
 
     {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\artem\\IdeaProjects\\LearningSpring\\src\\main\\java\\org\\spring\\learn\\RockMusics.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader(
+                    "src/main/java/org/spring/learn/musics/RockMusics.txt"));
             while (reader.ready()) {
                 rockMusicList.add(reader.readLine());
             }
